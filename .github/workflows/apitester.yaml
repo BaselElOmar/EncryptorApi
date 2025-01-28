@@ -1,0 +1,30 @@
+name: Xunit api tester
+
+on:
+  push:
+    branches:
+      - DevBranch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@v3
+
+
+     - name: Setup .NET
+       uses: actions/setup-dotnet@3
+       with:
+          dotnet-version: 8.x
+
+     - name: Restore Dependencies
+       run: dotnet restore
+
+     - name: Build soulution
+       run: dotnet build --no-resore --confguration debug
+
+     - name: run tests
+       run: dotnet test --no-build --configuration debug --verbosity diagonostic
+       continue-on-error: false
