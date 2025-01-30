@@ -1,4 +1,4 @@
-using EncrptoWeb.Service;
+using CryptoWeb.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
