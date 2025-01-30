@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using EncrptoWeb.Service;
+using EncrptoWeb.Models;
 
 namespace EncrptoWeb.Controllers
 {
@@ -6,12 +8,12 @@ namespace EncrptoWeb.Controllers
     [Route("[controller]")]
     public class EncryptController : ControllerBase
     {
-        private readonly VigenereCipher _vigenereCipher;
+        private readonly VigenereService _vigenereService;
         
 
-        public EncryptController(VigenereCipher vigenereCipher)
+        public EncryptController(VigenereService vigenereService)
         {
-            _vigenereCipher = vigenereCipher;
+            _vigenereService = vigenereService;
         }
 
         [HttpPost("encrypt")]
@@ -22,7 +24,7 @@ namespace EncrptoWeb.Controllers
                 return BadRequest("Text and key are required!");
             }
 
-            string encryptedText = _vigenereCipher.Encrypt(request.Text, request.Key);
+            string encryptedText = _vigenereService.Encrypt(request.Text, request.Key);
             return Ok(encryptedText);
         }
     }
