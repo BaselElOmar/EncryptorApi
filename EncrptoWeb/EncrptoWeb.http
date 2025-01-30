@@ -1,0 +1,6 @@
+@EncrptoWeb_HostAddress = http://localhost:5263
+
+GET {{EncrptoWeb_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
