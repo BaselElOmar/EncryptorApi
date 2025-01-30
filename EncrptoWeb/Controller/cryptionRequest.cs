@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EncrptoWeb.Models
+namespace CryptoWeb.Models
 {
-    public class EncryptionRequest
+    public class cryptionRequest
     {
         public string Text { get; set; }
         public string Key { get; set; }
