@@ -23,7 +23,7 @@ jobs:
        run: dotnet restore
 
      - name: Build soulution
-       run: dotnet build --no-resore --confguration debug
+       run: dotnet build --no-restore --configuration debug
 
      - name: run tests
        run: dotnet test --no-build --configuration debug --verbosity diagonostic
