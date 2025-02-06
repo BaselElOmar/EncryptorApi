@@ -1,14 +1,17 @@
-name: Deploy to AWS EB
+name: Deploy to AWS Elastic Beanstalk
 
-on: 
-  push:
+on:
+  pull_request:
+    types:
+      - closed
     branches:
-       - main
-
+      - main
 
 jobs:
-  build:
+  deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+
 
     steps: 
       - name: checkout repo
