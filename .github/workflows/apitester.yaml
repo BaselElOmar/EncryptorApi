@@ -3,7 +3,11 @@ name: Xunit api tester
 on:
   push:
     branches:
-      - Main
+      - main
+      - DevBranch
+  pull_request:
+    branches:
+      - main
       - DevBranch
 
 jobs:
