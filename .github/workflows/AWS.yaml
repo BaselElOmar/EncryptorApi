@@ -28,6 +28,13 @@ jobs:
       - name: create zip package
         run: cd site; zip ../site.zip *;
 
+
+      - name: Delete old versions
+        run: |
+           aws elasticbeanstalk delete-application-version \
+            --application-name EncryptApi \
+            --version-label ${{ github.run_id }} \
+            --region eu-north-1 || true
       
       - name: Deploy to aws EB
         uses: einaregilsson/beanstalk-deploy@v21
@@ -37,6 +44,7 @@ jobs:
           application_name: EncryptApi
           environment_name: EncryptApi-env
           version_label: ${{ github.run_id }}
+          version_description: "GitHub Actions deployment ${{ github.run_id }}"
           region: eu-north-1
           deployment_package: site.zip
     
