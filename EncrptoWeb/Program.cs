@@ -1,8 +1,5 @@
 using CryptoWeb.Service;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-
-
 
 var builder = WebApplication.CreateBuilder();
 
