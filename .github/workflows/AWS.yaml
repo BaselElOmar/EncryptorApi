@@ -27,6 +27,7 @@ jobs:
        - name: create zip package
          run: cd site; zip ../site.zip *;
 
+
        - name: Deploy to aws EB
          uses: einaregilsson/beanstalk-deploy@v21
          with:
@@ -37,3 +38,4 @@ jobs:
            version_label: ${{ github.run_id }}
            region: eu-north-1
            deployment_package: site.zip
+
