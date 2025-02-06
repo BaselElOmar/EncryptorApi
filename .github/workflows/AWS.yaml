@@ -1,42 +1,39 @@
-name: Deploy to AWS EB
+name: Deploy to AWS Elastic Beanstalk
 
-on: 
-  push:
+on:
+  pull_request:
+    types:
+      - closed
     branches:
-       - main
-
+      - main
 
 jobs:
-  build:
+  deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
-    steps: 
-      - name: checkout repo
-        uses: actions/checkout@v3
+    steps:
+       - name: checkout repo
+         uses: actions/checkout@v3
 
-      
-      - name: setup dotnet
-        uses: actions/setup-dotnet@v3
-        with: 
-            dotnet-version : '8.0'
-    
-      
-      - name: build project 
-        run: dotnet restore; dotnet publish -o site;
+       - name: Setup dotnet
+         uses: actions/setup-dotnet@v3
+         with: 
+           dotnet-version: '8.0'
 
-      
-      - name: create zip package
-        run: cd site; zip ../site.zip *;
+       - name: Build project  
+         run: dotnet restore; dotnet publish -o site;
 
-      
-      - name: Deploy to aws EB
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: EncryptApi
-          environment_name: EncryptApi-env
-          version_label: ${{ github.run_id }}
-          region: eu-north-1
-          deployment_package: site.zip
-    
+       - name: create zip package
+         run: cd site; zip ../site.zip *;
+
+       - name: Deploy to aws EB
+         uses: einaregilsson/beanstalk-deploy@v21
+         with:
+           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID}}
+           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+           application_name: EncryptApi
+           environment_name: EncryptApi-env
+           version_label: ${{ github.run_id }}
+           region: eu-north-1
+           deployment_package: site.zip
