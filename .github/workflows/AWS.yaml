@@ -29,7 +29,7 @@ jobs:
 
       
       - name: create zip package
-        run: cd site; zip ../site.zip *;
+        run: cd EncrptoWeb/site; zip ../site.zip *;
       
       - name: Deploy to aws EB
         uses: einaregilsson/beanstalk-deploy@v21
