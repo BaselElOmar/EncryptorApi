@@ -25,7 +25,7 @@ jobs:
     
       
       - name: build project 
-        run: dotnet restore; dotnet publish -o site;
+        run: cd EncrptoWeb; dotnet restore; dotnet publish -o site;
 
       
       - name: create zip package
